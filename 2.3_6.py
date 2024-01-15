@@ -1,38 +1,15 @@
-import math
-
-
-class Complex:
-    def __init__(self, real, img):
-        self.__real = real
-        self.__img = img
-
-    @property
-    def real(self):
-        return self.__real
-
-    @real.setter
-    def real(self, num):
-        if type(num) in (int, float):
-            self.__real = num
+class RenderList:
+    def __init__(self, type_list ):
+        if type_list not in ('ul', "ol"):
+            self.type_list = 'ul'
         else:
-            raise ValueError("Неверный тип данных.")
+            self.type_list = type_list
 
-    @property
-    def img(self):
-        return self.__img
-
-    @img.setter
-    def img(self, num):
-        if type(num) in (int, float):
-            self.__img = num
-        else:
-            raise ValueError("Неверный тип данных.")
-
-    def __abs__(self):
-        return math.sqrt(self.real * self.real + self.img * self.img)
+    def __call__(self, lst, *args, **kwargs):
+            return f"<{self.type_list}>\n<li>{lst[0]}</li>\n<li>{lst[1]}</li>\n<li>{lst[2]}</li>\n</{self.type_list}>"
 
 
-cmp = Complex(7, 8)
-cmp.real = 3
-cmp.img = 4
-c_abs = cmp.__abs__()
+lst = ["Пункт меню 1", "Пункт меню 2", "Пункт меню 3"]
+render = RenderList('ol')
+html = render(lst)
+print(html)
